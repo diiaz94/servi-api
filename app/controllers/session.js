@@ -6,7 +6,6 @@ const util = require('../utils/util');
 
 exports.authenticate = function (req, res) {
     let { login, password } = req.body;
-    console.log(req.body)
     User.authenticate({ login, password }).then(user => {
         if (!user)
             throw { name: "USER_NOT_FOUND" }
@@ -19,10 +18,7 @@ exports.authenticate = function (req, res) {
 
 exports.create = function (req, res) {
     let { login, password } = req.body;
-    console.log(req.body)
     User.create({ login, password }).then(user => {
-        console.log("usercreated", user);
-
         return util.okResponse(res, 200, user);
     }).catch(err => {
         return util.errorResponse(res, err);

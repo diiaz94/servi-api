@@ -13,8 +13,6 @@ exports.okResponse = (res, httpCode, response) => {
     )
 }
 exports.errorResponse = (res, data) => {
-    
-    console.log("err", data);
 
     let { name, extra } = data;
     let error = CTS.ERRORS[name] || CTS.DEFAULT_ERROR;

@@ -62,8 +62,6 @@ exports.create = (args) => {
             login
         })
             .then(user => {
-                console.log("USER", user);
-
                 if (user) {
                     //Error, user already exists
                     return reject({
@@ -90,8 +88,6 @@ exports.create = (args) => {
             .catch(err => {
                 //Some error ocurred. 
                 //Return the error info.
-                console.log("err", err);
-
                 return reject({
                     name: "INTERNAL_ERROR",
                     extra: err
