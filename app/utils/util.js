@@ -4,7 +4,7 @@ let CTS = require('./constants'),
     moment = require('moment'),
     jwt = require('jsonwebtoken'),
     config = require('../../config/main').get(process.env.NODE_ENV)
-const SECRET = config.secret;
+    const secrets = require('../../config/secrets');
 
 
 exports.okResponse = (res, httpCode, response) => {
@@ -29,7 +29,7 @@ exports.errorResponse = (res, data) => {
 
 exports.generateToken = (doc, expiresIn) => {
 
-    return jwt.sign(doc, SECRET, {
+    return jwt.sign(doc, secrets.jwtSecret, {
         expiresIn: expiresIn
     });
 }

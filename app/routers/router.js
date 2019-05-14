@@ -1,5 +1,7 @@
-let express = require('express');
-let sessionController = require('../controllers/session');
+const express = require('express');
+const sessionController = require('../controllers/session');
+const models = require('../models');
+const crud = require('../crud');
 
 module.exports = (app) => {
 
@@ -16,5 +18,7 @@ module.exports = (app) => {
     apiRoutes.post('/login', sessionController.authenticate);
     apiRoutes.post('/signup', sessionController.create);
 
+
+    app.use('/v1/services', crud(models.Services));
     app.use('/v1', apiRoutes);
 }

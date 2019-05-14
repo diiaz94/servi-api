@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const secrets = require('../../config/secrets');
 
+const CTS = require('../utils/constants');
 const User = require('../models/user');
 const util = require('../utils/util');
 
@@ -9,7 +10,10 @@ exports.authenticate = function (req, res) {
     User.authenticate({ login, password }).then(user => {
         if (!user)
             throw { name: "USER_NOT_FOUND" }
-        return util.okResponse(res, 200, user);
+        delete user._doc.password;
+        let response = { user };
+        response.token = util.generateToken({ user: user._doc }, CTS.TOKEN_EXPIRES_IN);
+        return util.okResponse(res, 200, response);
     }).catch(err => {
         return util.errorResponse(res, err);
     });
@@ -26,16 +30,4 @@ exports.create = function (req, res) {
 
 }
 
-function sendToken(req, res) {
-    if (req.user) {
-        res.json({
-            user: req.user,
-            jwt: req.token
-        })
-    } else {
-        res.status(422).json({
-            error: 'Could not create user'
-        })
-    }
-}
 
