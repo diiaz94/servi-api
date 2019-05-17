@@ -4,12 +4,13 @@ let CTS = require('./constants'),
     moment = require('moment'),
     jwt = require('jsonwebtoken'),
     config = require('../../config/main').get(process.env.NODE_ENV)
-    const secrets = require('../../config/secrets');
+
+const secrets = require('../../config/secrets');
 
 
-exports.okResponse = (res, httpCode, response) => {
+exports.okResponse = (res, httpCode, data) => {
     return res.status(httpCode).json(
-        response
+        { error: false, message: "", data }
     )
 }
 exports.errorResponse = (res, data) => {
@@ -18,7 +19,9 @@ exports.errorResponse = (res, data) => {
     let error = CTS.ERRORS[name] || CTS.DEFAULT_ERROR;
 
     return res.status(error.httpCode).json({
-        error: {
+        error: true,
+        message: error.description,
+        data: {
             name,
             code: error.code,
             description: error.description,
