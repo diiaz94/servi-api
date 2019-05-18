@@ -1,5 +1,5 @@
 const express = require('express');
-
+const util = require('./utils/util');
 module.exports = (Collection) => {
 
   // ======
@@ -7,28 +7,28 @@ module.exports = (Collection) => {
   // ======
   const create = (req, res) => {
     const newEntry = req.body;
-    Collection.create(newEntry, (e,newEntry) => {
-      if(e) {
+    Collection.create(newEntry, (e, newEntry) => {
+      if (e) {
         console.log(e);
-        res.sendStatus(500);
+        return util.errorResponse(res, e);;
       } else {
-        res.send(newEntry);
+        return util.okResponse(res, 200, newEntry);
       }
     });
   };
-  
+
   // =========
   // Read many
   // =========
   const readMany = (req, res) => {
     let query = res.locals.query || {};
-  
-    Collection.find(query, (e,result) => {
-      if(e) {
-        res.status(500).send(e);
+
+    Collection.find(query, (e, result) => {
+      if (e) {
         console.log(e.message);
+        return util.errorResponse(res, e);
       } else {
-        res.send(result);
+        return util.okResponse(res, 200, result);
       }
     });
   };
@@ -38,39 +38,42 @@ module.exports = (Collection) => {
   // ========
   const readOne = (req, res) => {
     const { _id } = req.params;
-  
-    Collection.findById(_id, (e,result) => {
-      if(e) {
-        res.status(500).send(e);
+
+    Collection.findById(_id, (e, result) => {
+      if (e) {
+
         console.log(e.message);
+        return util.errorResponse(res, e);
       } else {
-        res.send(result);
+        return util.okResponse(res, 200, result);
       }
     });
   };
-  
+
   // ======
   // Update
   // ======
   const update = (req, res) => {
     const changedEntry = req.body;
-    Collection.update({ _id: req.params._id }, { $set: changedEntry }, (e) => {
+    Collection.update({ _id: req.params._id }, { $set: changedEntry }, (e, result) => {
       if (e)
-        res.sendStatus(500);
+
+        return util.errorResponse(res, e);
       else
-        res.sendStatus(200);
+        return util.okResponse(res, 200, result);
     });
   };
-  
+
   // ======
   // Remove
   // ======
   const remove = (req, res) => {
-    Collection.remove({ _id: req.params._id }, (e) => {
+    Collection.remove({ _id: req.params._id }, (e, result) => {
       if (e)
-      res.status(500).send(e);
+
+        return util.errorResponse(res, e);
       else
-        res.sendStatus(200);
+        return util.okResponse(res, 200, result);
     });
   };
 

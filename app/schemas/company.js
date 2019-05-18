@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
-let serviceSchema = new mongoose.Schema({
+let companySchema = new mongoose.Schema({
     name: { type: String, required: true },
     description: String,
-    phone: String,
+    phones: String,
     verified: { type: Boolean, default: false },
     location: {
         address: String,
@@ -19,4 +19,4 @@ let serviceSchema = new mongoose.Schema({
         }
     });
 
-module.exports = serviceSchema
+module.exports = companySchema

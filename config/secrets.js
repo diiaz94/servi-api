@@ -1,9 +1,8 @@
 module.exports = {
     cloudinary: {
-        api_key: '766663664595757',
-        cloud_name: 'dzbdfh66n',
-        api_secret: 'Npgg38VNEHJIVOnV7nWJ2rsi-I4'
+        api_key: '687679373855854',
+        cloud_name: 'servi-store',
+        api_secret: 'omLmG30VgfX3_aDHZ3xV3FzK6Ik'
     },
     jwtSecret: 'RAJ5GEHA5C3K99EUH4RN626UNZ95TU4D'
-
 }

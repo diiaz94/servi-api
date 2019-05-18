@@ -1,5 +1,5 @@
 const upload = require('../../config/upload');
-const Service = require('../models/service');
+const Company = require('../models/company');
 const helpers = require('./helpers');
 
 const validParams = ['name', 'description', 'phone', 'location', 'thumbnail', 'avatar'];
@@ -17,8 +17,8 @@ exports.create = (req, res, next) => {
 
     console.log("req.files", req.files)
     return
-    Service.create(req.body).then(doc => {
-        req.service = doc;
+    Company.create(req.body).then(doc => {
+        req.company = doc;
         next();
     }).catch(err => {
         next(err);
@@ -26,7 +26,7 @@ exports.create = (req, res, next) => {
 }
 
 exports.saveImage = (req, res) => {
-    if (req.service) {
+    if (req.company) {
         const files = ['avatar', 'thumbnail'];
         const promises = [];
 
@@ -36,7 +36,7 @@ exports.saveImage = (req, res) => {
                 console.log("imageType::", imageType);
 
                 const path = req.files[imageType][0].path;
-                promises.push(req.service.updateImage(path, imageType));
+                promises.push(req.company.updateImage(path, imageType));
 
             }
         })
@@ -44,7 +44,7 @@ exports.saveImage = (req, res) => {
 
         Promise.all(promises).then(results => {
             //console.log("results", results);
-            res.json(req.service);
+            res.json(req.company);
         }).catch(err => {
             console.log("ERR", err);
             res.json(err);

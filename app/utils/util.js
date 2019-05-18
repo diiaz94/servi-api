@@ -24,7 +24,7 @@ exports.errorResponse = (res, data) => {
         data: {
             name,
             code: error.code,
-            description: error.description,
+            description: data.message || error.description,
             extra: extra
         }
     })

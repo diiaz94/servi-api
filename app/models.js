@@ -1,10 +1,10 @@
 
 
-const servicesSchema = require('./schemas/service');
+const ServicesModel= require('./models/service');
+const CompaniesModel= require('./models/company');
 
 const models = {};
-models.Services = servicesSchema;
-
-
+models.Services = ServicesModel;
+models.Companies = CompaniesModel;
 
 module.exports = models;
