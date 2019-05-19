@@ -1,10 +1,9 @@
 const express = require('express');
 const sessionController = require('../controllers/session');
 const serviceController = require('../controllers/service');
-//const comapnyController = require('../controllers/company');
+const companyController = require('../controllers/company');
 const models = require('../models');
 const crud = require('../crud');
-const upload = require('../../config/upload')
 module.exports = (app) => {
 
     var apiRoutes = express.Router();
@@ -26,7 +25,9 @@ module.exports = (app) => {
           serviceController.create,
           serviceController.saveImage);*/
     //app.use('/v1/services', crud(models.Services));
+
+    app.use('/v1/companies/search', companyController.search);
     app.use('/v1/companies', crud(models.Companies));
-  //  app.use('/v1/companies/search', crud(models.Companies));
+    app.use('/v1/categories', crud(models.Categories));
     app.use('/v1', apiRoutes);
 }   
