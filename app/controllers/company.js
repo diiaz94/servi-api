@@ -8,16 +8,18 @@ exports.search = (req, res, next) => {
 
     let { text, category } = req.query || {};
 
-    console.log(text);
+    if (!text) return util.errorResponse(res, "MISSING_REQUIRED_FIELDS");
+
     let regex = '.*' + text.replace(/ /g, '.*') + '.*';
-    Company.find({
+    let match = {
         name: {
             $regex: regex,
             $options: 'im'
         },
-        categories: category,
         visible: true
-    }, (e, result) => {
+    };
+    if (category) match.categories = category;
+    Company.find(match, (e, result) => {
         if (e) {
             console.log(e.message);
             return util.errorResponse(res, e);
