@@ -6,6 +6,11 @@ exports.RECOVERY_CODE_EXPIRATION_TIME = process.env.recoveryCodeExpirationTime |
 exports.MS_PER_DAY = 1000 * 60 * 60 * 24;
 exports.TOKEN_EXPIRES_IN = process.env.TOKEN_EXPIRES_IN || "365d";
 
+
+exports.DROPBOX_FOLDER_PATH = '/resources';
+exports.ACCEPTED_EXTENSIONS = ['JPG', 'JPEG', 'PNG'];
+exports.MAX_FILE_SIZE = 10000000; //10MB
+
 exports.ERRORS = {
   "INTERNAL_ERROR": {
     httpCode: 400,

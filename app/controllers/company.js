@@ -8,7 +8,7 @@ exports.search = (req, res, next) => {
 
     let { text, category } = req.query || {};
 
-    if (!text) return util.errorResponse(res, "MISSING_REQUIRED_FIELDS");
+    if (!text) return util.errorResponse(res, {name:"MISSING_REQUIRED_FIELDS"});
 
     let regex = '.*' + text.replace(/ /g, '.*') + '.*';
     let match = {

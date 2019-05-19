@@ -1,7 +1,7 @@
 const express = require('express');
 const sessionController = require('../controllers/session');
-const serviceController = require('../controllers/service');
 const companyController = require('../controllers/company');
+const dropboxController = require('../controllers/dropbox');
 const models = require('../models');
 const crud = require('../crud');
 module.exports = (app) => {
@@ -18,7 +18,8 @@ module.exports = (app) => {
 
     apiRoutes.post('/login', sessionController.authenticate);
     apiRoutes.post('/signup', sessionController.create);
-
+    apiRoutes.post('/upload', dropboxController.upload);
+    apiRoutes.get('/resources/:name', dropboxController.download);
 
     /*  app.post('/v1/services',
           upload.fields([{ name: 'avatar', maxCount: 1 }, { name: 'thumbnail', maxCount: 1 }]),
