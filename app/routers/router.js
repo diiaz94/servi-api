@@ -27,7 +27,7 @@ module.exports = (app) => {
           serviceController.saveImage);*/
     //app.use('/v1/services', crud(models.Services));
 
-    app.use('/v1/companies/search', companyController.search);
+    app.get('/v1/companies', companyController.all);
     app.use('/v1/companies', crud(models.Companies));
     app.use('/v1/categories', crud(models.Categories));
     app.use('/v1', apiRoutes);
