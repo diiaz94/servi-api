@@ -69,7 +69,7 @@ ticketProcedure.init();
 billProcedure.init();*/
 
 
-app.set('port', (process.env.PORT || 3000));
+app.set('port', (process.env.PORT || 3001));
 
 // START THE SERVER
 // =============================================================================

@@ -40,14 +40,8 @@ let companySchema = new mongoose.Schema({
         latitude: String,
         longitude: String
     },
-    thumbnail_image: {
-        type: String,
-        default: "/resources/5ce229ec23111c24781b3480.PNG"
-    },
-    avatar_image: {
-        type: String,
-        default: "/resources/5ce229ec23111c24781b3480.PNG"
-    },
+    thumbnail_image: String,
+    avatar_image: String,
     categories: [
         {
             type: mongoose.Schema.ObjectId,

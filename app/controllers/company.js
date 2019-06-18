@@ -32,7 +32,7 @@ exports.all = (req, res, next) => {
     match.visible = true;
     // return res.json(match)
 
-    if (category) match.categories = category;
+    if (!!category) match.categories = category;
     Company.find(match, (e, result) => {
         if (e) {
             console.log(e.message);
